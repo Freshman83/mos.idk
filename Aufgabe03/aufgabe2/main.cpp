@@ -47,7 +47,9 @@ int main(void)
 		glTranslatef(-1.0,0.25,0.0);
 
 		// Tachonadel rotieren.
-		glRotatef(0.0,0.0,0.0,0.0);
+		glRotatef(-90.0,0.0,0.0,-0.5);
+		// Tachonadel verschieben.
+		glTranslatef(-0.25,0.25,0.0);
 
 		// Tachonadel zeichnen.
 		tileDraw(&needle);
