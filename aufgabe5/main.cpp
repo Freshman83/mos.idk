@@ -2,8 +2,8 @@
 // CanParser - Aufgabe 5
 //
 // Bearbeitet von:
-//     Name, Matrikelnummer
-//     Name, Matrikelnummer
+//     Sascha Niklas, Matrikelnummer
+//     David Rotärmel, Matrikelnummer
 //
 // --------------------------------------------------------------------------
 
@@ -28,24 +28,44 @@ struct log_entry
 
 int main (void)
 {
+	int error;
 	// Socket mit dem angegebenen CAN-Interface öffnen, danach kann
 	// mit read() und write() auf das Interface zugegriffen werden.
 	int fd_can;
 	fd_can = can_open("vcan0");
-
+	if (fd_can == -1)
+		perror("CAN Error");
 	// Log-Datei öffnen. Hier sind die Daten in Form von struct log_entry
 	// Einträgen hinterlegt, die nacheinander mit read() lesbar sind.
 	int fd_log;
-	// fd_log = open(...); <- Hier Ihren Code einfügen!
-
+	fd_log = open(LOG_FILE, O_RDONLY, 0660);
+	if (fd_log == -1)
+		perror("Log Error");
 	// Einzelnen Log-Eintrag auslesen.
 	struct log_entry entry;
-	read(fd_log, &entry, sizeof(struct log_entry));
+	int eof = 1;
+	while (eof != 0)
+	{
+		eof = read(fd_log, &entry, sizeof(struct log_entry));
+		if (eof == -1){
+			perror("Read Error");
+		}
+		if (eof == 0) {
+			printf("End of File\n");
+		}
 
-	// Eine einzelne Nachricht an das CAN-Interface senden.
-	// Als Inhalt dient das can_frame innerhalb der log_entry Struktur.
-	write(fd_can, &entry.can_frame, sizeof(struct can_frame));
+		// Eine einzelne Nachricht an das CAN-Interface senden.
+		// Als Inhalt dient das can_frame innerhalb der log_entry Struktur.
+		error = write(fd_can, &entry.can_frame, sizeof(struct can_frame));
+		if (error == -1)
+		{
+			perror("Write Error");
+			return 0;
+		}
+		usleep(entry.timeval.tv_usec);
+	}
 
+	close(fd_log);
 	// Programm beenden
 	return 0;
 }
