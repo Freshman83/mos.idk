@@ -44,12 +44,18 @@ int main(void)
 		glPushMatrix();
 
 		// Tachonadel verschieben.
-		glTranslatef(-1.0,0.25,0.0);
+		glTranslatef(-1.0,0.0,0.0);
 
 		// Tachonadel rotieren.
-		glRotatef(-90.0,0.0,0.0,-0.5);
+		// 135.0 = 0 km/h
+		// 90.0 = 30 km/h
+		// 45.0 = 60 km/h
+		// 0.0 = 90 km/h
+		// -60.0 = 130 km/h (15° = 10 km/h)
+		glRotatef(-75.0,0.0,0.0,1.0);
+
 		// Tachonadel verschieben.
-		glTranslatef(-0.25,0.25,0.0);
+		glTranslatef(0.0,0.25,0.0);
 
 		// Tachonadel zeichnen.
 		tileDraw(&needle);
