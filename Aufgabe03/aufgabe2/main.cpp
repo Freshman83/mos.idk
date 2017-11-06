@@ -16,6 +16,22 @@
 #include "../lib/gles.h" // struct opengles, gles*-Funktionen
 #include "../lib/tile.h" // struct tile, loadPngTile
 
+GLfloat kmh2deg(GLfloat kmh)
+{
+	if (0.0f < kmh && kmh <= 150.0f)
+	{
+		return 135.0f - kmh * 1.5f;
+	}
+	else if (kmh > 150.0f)
+	{
+		return 150.0f;
+	}
+	else
+	{
+		return 0.0;
+	}
+}
+
 int main(void)
 {
 	// OpenGL ES initialisieren
@@ -29,7 +45,8 @@ int main(void)
 	// Textur für Tachonadel laden
 	struct tile needle = TILE_ZEROINIT;
 	tileLoadPng(&opengles, &needle, "../bilder/needle.png");
-
+	
+	GLfloat angle = kmh2deg(30);
 	do
 	{
 		// Framebuffer löschen.
@@ -47,12 +64,8 @@ int main(void)
 		glTranslatef(-1.0,0.0,0.0);
 
 		// Tachonadel rotieren.
-		// 135.0 = 0 km/h
-		// 90.0 = 30 km/h
-		// 45.0 = 60 km/h
-		// 0.0 = 90 km/h
-		// -60.0 = 130 km/h (15° = 10 km/h)
-		glRotatef(-75.0,0.0,0.0,1.0);
+		// 135.0° = 0 km/h; 0.0° = 90 km/h => 1,5° = 1 km/h
+		glRotatef(angle,0.0,0.0,1.0);
 
 		// Tachonadel verschieben.
 		glTranslatef(0.0,0.25,0.0);
