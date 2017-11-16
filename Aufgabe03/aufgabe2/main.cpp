@@ -1,5 +1,5 @@
 // --------------------------------------------------------------------------
-// DashBoard - Aufgabe 1
+// DashBoard - Aufgabe 3.2
 //
 // Bearbeitet von:
 //     Sascha Niklas, Matrikelnummer
@@ -77,7 +77,7 @@ int main(void)
 
 		// ---- Das gezeichnete Bild sichtbar machen ----------------
 		glesDraw(&opengles);
-		usleep(1000 * 1000);
+		usleep(16 * 1000);
 
 	}
 	while(glesRun(&opengles));
@@ -87,3 +87,8 @@ int main(void)
 
 	return 0;
 }
+
+/*
+Push/Pop: Der letzte Befehl wird zuerst ausgeführt
+
+*/
