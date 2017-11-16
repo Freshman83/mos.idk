@@ -113,7 +113,7 @@ int main(void)
 
 		// ---- Das gezeichnete Bild sichtbar machen ----------------
 		glesDraw(&opengles);
-		usleep(1000 * 1000);
+		usleep(16 * 1000);
 
 	}
 	while(glesRun(&opengles));
