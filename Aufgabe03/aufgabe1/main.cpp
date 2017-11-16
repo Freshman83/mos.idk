@@ -2,8 +2,8 @@
 // DashBoard - Aufgabe 1
 //
 // Bearbeitet von:
-//     Name, Matrikelnummer
-//     Name, Matrikelnummer
+//     Sascha Niklas, Matrikelnummer
+//     David Rotärmel, Matrikelnummer
 //
 // --------------------------------------------------------------------------
 
@@ -56,7 +56,7 @@ int main(void)
 
 		// ---- Das gezeichnete Bild sichtbar machen ----------------
 		glesDraw(&opengles);
-		usleep(1000 * 1000);
+		usleep(16 * 1000);
 
 	}
 	while(glesRun(&opengles));
@@ -66,3 +66,10 @@ int main(void)
 
 	return 0;
 }
+
+/*
+a) top Befehl -> do-while Schleife läuft ohne Pause
+Messung z.B. über timestamp,
+Timer damit genau z.B. 30 fps erreicht werden (Interrupt)
+
+*/
