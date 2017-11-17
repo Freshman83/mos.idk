@@ -14,9 +14,9 @@
 #include <stdio.h>     
 #include <stdlib.h>     
 #include <unistd.h>      
-#include <math.h> 
-#include <pthread.h>      
+#include <math.h>       
 #include <GL/glut.h> 
+#include "dashboard.h"
 #include "gles.h" 
 #include "tile.h" 
 #include "draw.h"
@@ -55,7 +55,7 @@ GLfloat rpm2deg(GLfloat rpm)
 
 void *draw_main(void *data)
 {
-	GLfloat *value = (GLfloat *) data;
+	struct dashboard *db = (struct dashboard *)data;
 	// OpenGL ES initialisieren
 	struct opengles opengles;
 	glesInitialize(&opengles);
@@ -69,10 +69,11 @@ void *draw_main(void *data)
 	tileLoadPng(&opengles, &needle, "../bilder/needle.png");
 
 	GLuint counter = 0;
-	GLfloat rpmdeg = rpm2deg(1000);
-	GLfloat kmhdeg = kmh2deg(*value);
+
 	do
 	{
+		GLfloat rpmdeg = rpm2deg(db->rpm);
+		GLfloat kmhdeg = kmh2deg(db->kmh);
 		// Framebuffer löschen.
 		glClear(GL_COLOR_BUFFER_BIT);
 
@@ -107,7 +108,7 @@ void *draw_main(void *data)
 		// Das gezeichnete Bild sichtbar machen.
 		glesDraw(&opengles);
 
-		usleep(200 * 1000);
+		usleep(16 * 1000);
 
 		// Counter inkrementieren.
 		counter++;

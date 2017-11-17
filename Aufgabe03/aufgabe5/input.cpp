@@ -24,7 +24,7 @@
 void* input_main(void *data)
 {
 	dashboard_t *db = (dashboard_t *)data;
-
+	
 	// CAN-Interface öffnen
 	int fd_can;
 	fd_can = can_open(db->dev);

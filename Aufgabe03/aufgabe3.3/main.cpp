@@ -56,14 +56,14 @@ int main(void)
 
 	// Textur für Dashboard laden
 	struct tile dashboard = TILE_ZEROINIT;
-	tileLoadPng(&opengles, &dashboard, "../bilder/ziffernblatt1.png");
+	tileLoadPng(&opengles, &dashboard, "../bilder/dashboardgroup7.png");
 
 	// Textur für Tachonadel laden
 	struct tile needle = TILE_ZEROINIT;
 	tileLoadPng(&opengles, &needle, "../bilder/needle.png");
 	
-	GLfloat kmh = kmh2deg(0);
-	GLfloat rpm = rpm2deg(2500);
+	GLfloat kmh = kmh2deg(100);
+	GLfloat rpm = rpm2deg(1000);
 	do
 	{
 		// Framebuffer löschen.
@@ -78,14 +78,14 @@ int main(void)
 		glPushMatrix();
 
 		// Tachonadel verschieben.
-		glTranslatef(0.0,0.0,0.0);
+		glTranslatef(-0.75,0.0,0.0);
 
 		// Tachonadel rotieren.
 		// 135.0° = 0 km/h; 0.0° = 90 km/h => 1,5° = 1 km/h
-		glRotatef(kmh,0.0,0.0,1.0);
+		glRotatef(kmh,0.0,0.0,0.0);
 
 		// Tachonadel verschieben.
-		glTranslatef(0.0,0.5,0.0);
+		glTranslatef(0.0,0.25,0.0);
 
 		// Tachonadel zeichnen.
 		tileDraw(&needle);
@@ -93,11 +93,11 @@ int main(void)
 		glPopMatrix();
 
 		// ---- Rechte Tachonadel zeichnen ---------------------------
-/*
+
 		glPushMatrix();
 
 		// Tachonadel verschieben.
-		glTranslatef(1.0,0.0,0.0);
+		glTranslatef(0.75,0.0,0.0);
 
 		// Tachonadel rotieren.
 		// 75.0° = 7000 rpm; -135.0° = 0 rpm => 30° = 1000 rpm
@@ -110,10 +110,10 @@ int main(void)
 		tileDraw(&needle);
 
 		glPopMatrix();
-*/
+
 		// ---- Das gezeichnete Bild sichtbar machen ----------------
 		glesDraw(&opengles);
-		usleep(1000 * 1000);
+		usleep(16 * 1000);
 
 	}
 	while(glesRun(&opengles));

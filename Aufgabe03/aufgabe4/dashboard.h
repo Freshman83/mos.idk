@@ -7,12 +7,18 @@
 //
 // --------------------------------------------------------------------------
 
-#ifndef INPUT_H_
-#define INPUT_H_ 1
+#ifndef GLOBAL_H_
+#define GLOBAL_H_
 
 #include <stdint.h>
-#include "dashboard.h"
 
-void* input_main(void *data);
+struct dashboard
+{
+	float kmh;
+	float rpm;
+};
+
+typedef struct dashboard dashboard_t;
+#define DASHBOARD_ZEROINIT { 0, 0, }
 
 #endif
