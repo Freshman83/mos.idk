@@ -17,11 +17,11 @@ void* input_main(void *data)
 {
 	dashboard_t *db = (dashboard_t *)data;
 	
-	for(float i = 0.0f; i <= 1000.0f; i += 100.0f)
+	for(float i = 0.0f; i <= 7000.0f; i += 100.0f)
 	{
-		db->kmh = 50.0f + i;
-		db->rpm = 3000.0f + i;
-		usleep(33 * 1000);
+		db->kmh = 0.0f + i/100;
+		db->rpm = 0.0f + i;
+		usleep(100 * 1000);
 	}
 
 	return 0;
