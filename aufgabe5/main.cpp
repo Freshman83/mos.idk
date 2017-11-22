@@ -20,6 +20,18 @@
 //#define LOG_FILE         "../logs/20100930-1400_opel-obd-can.raw"
 #define LOG_FILE         "../logs/20121011_bmw_stopngo_5min.raw"
 
+struct timeval logTimeOld;
+void suspendAccordingToLogTime(int entryCount, struct timeval logTimeNew){
+	if(entryCount != 1){
+		if((logTimeNew.tv_usec - logTimeOld.tv_usec) >= 1){
+			printf("Current Log-Entry: %i\tNow sleeping for %ld\tus\n",
+					entryCount, (logTimeNew.tv_usec - logTimeOld.tv_usec));
+			usleep( (logTimeNew.tv_usec - logTimeOld.tv_usec) );
+		};
+	};
+	logTimeOld = logTimeNew;
+};
+
 // Diese Datenstruktur repräsentiert einen einzelnen Eintrag in der Log-Datei.
 struct log_entry
 {
@@ -29,6 +41,8 @@ struct log_entry
 
 int main (void)
 {
+	int entryCounter = 0;
+	struct timeval tvLog;
 	int error;
 	// Socket mit dem angegebenen CAN-Interface öffnen, danach kann
 	// mit read() und write() auf das Interface zugegriffen werden.
@@ -62,8 +76,12 @@ int main (void)
 		{
 			perror("Write Error");
 			return 0;
-		}		
-		usleep(entry.timeval.tv_usec);
+		}	
+		entryCounter++;	
+		suspendAccordingToLogTime(entryCounter, entry.timeval);
+		if(entryCounter == 1){
+			tvLog = entry.timeval;
+		};
 	}
 
 	close(fd_log);
