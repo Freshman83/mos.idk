@@ -1,6 +1,11 @@
 // --------------------------------------------------------------------------
-//  Copyright © 2014  CS  -  All rights reserved
+// DashBoard - Aufgabe 5
+// Bearbeitet von:
+//     Sascha Niklas, 257146
+//     David Rotärmel, 258201
+//
 // --------------------------------------------------------------------------
+
 
 #include <stdio.h>     // printf, fprintf
 #include <stdlib.h>    // exit
@@ -17,10 +22,11 @@ int main(int argc, char **argv)
 	dashboard_t *db = new dashboard_t();
 
 	db->fuel = 0.5f;
+	db->temp = 90.0f;
 
 	     if (argc > 2) { db->dev = argv[1]; db->type = argv[2]; }
-	else if (argc > 1) { db->dev = argv[1]; db->type = "mki"; }
-	else               { db->dev = "vcan0"; db->type = "mki"; }
+	else if (argc > 1) { db->dev = argv[1]; db->type = "astra"; }
+	else               { db->dev = "vcan0"; db->type = "bmw"; }
 
 	// Create worker threads
 	pthread_t draw_thread;

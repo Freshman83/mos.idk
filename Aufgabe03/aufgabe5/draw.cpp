@@ -1,6 +1,12 @@
 // --------------------------------------------------------------------------
-//  Copyright © 2014  CS  -  All rights reserved
+// DashBoard - Aufgabe 5
+//
+// Bearbeitet von:
+//     Sascha Niklas, 257146
+//     David Rotärmel, 258201
+//
 // --------------------------------------------------------------------------
+
 
 #ifndef _GNU_SOURCE
 #define _GNU_SOURCE    // Nötig für asprintf()
@@ -115,11 +121,11 @@ void* draw_main(void *data)
 
 	// Textur für Dashboard laden
 	struct tile dashboard = TILE_ZEROINIT;
-	tileLoadPng(&opengles, &dashboard, "../bilder/dashboard_full.png");
+	tileLoadPng(&opengles, &dashboard, "../bilder/dashboard_group7.png");
 
 	// Textur für Tachonadel laden
 	struct tile needle = TILE_ZEROINIT;
-	tileLoadPng(&opengles, &needle, "../bilder/needle.png");
+	tileLoadPng(&opengles, &needle, "../bilder/needle2.png");
 
 	// Textur für Blinker Links laden
 	struct tile blink = TILE_ZEROINIT;
@@ -265,7 +271,7 @@ void* draw_main(void *data)
 		glesDraw(&opengles);
 
 		// 12ms warten um CPU-Last zu verringern.
-		usleep(20 * 1000);
+		usleep(12 * 1000);
 
 		// Counter inkrementieren.
 		counter++;

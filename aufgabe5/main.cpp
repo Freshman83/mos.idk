@@ -17,7 +17,8 @@
 
 // Feste Definitionen für dieses Programm
 #define CAN_INTERFACE    "vcan0"
-#define LOG_FILE         "../logs/20100930-1400_opel-obd-can.raw"
+//#define LOG_FILE         "../logs/20100930-1400_opel-obd-can.raw"
+#define LOG_FILE         "../logs/20121011_bmw_stopngo_5min.raw"
 
 // Diese Datenstruktur repräsentiert einen einzelnen Eintrag in der Log-Datei.
 struct log_entry
@@ -61,7 +62,7 @@ int main (void)
 		{
 			perror("Write Error");
 			return 0;
-		}
+		}		
 		usleep(entry.timeval.tv_usec);
 	}
 

@@ -2,10 +2,11 @@
 // DashBoard - Aufgabe 3.2
 //
 // Bearbeitet von:
-//     Sascha Niklas, Matrikelnummer
-//     David Rotärmel, Matrikelnummer
+//     Sascha Niklas, 257146
+//     David Rotärmel, 258201
 //
 // --------------------------------------------------------------------------
+
 
 // Header
 #include <stdio.h>       // printf, fprintf
